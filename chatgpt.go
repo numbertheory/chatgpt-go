@@ -27,7 +27,7 @@ func main() {
 		if userInput == "exit" {
 			break
 		}
-		fmt.Printf(chat.SendChat(userInput) + "\n")
+		fmt.Printf(chat.SendChat(userInput, token) + "\n")
 	}
 
 }
