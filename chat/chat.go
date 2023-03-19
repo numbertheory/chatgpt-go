@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 )
 
 type ChatGPTChoices struct {
@@ -46,7 +47,9 @@ func SendChat(query string, token string) string {
 	request, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonBody))
 	request.Header.Set("Content-Type", "application/json; charset=UTF-8")
 	request.Header.Set("Authorization", "Bearer "+token)
-	client := &http.Client{}
+	client := http.Client{
+		Timeout: 5 * time.Second,
+	}
 	response, error := client.Do(request)
 	if error != nil {
 		panic(error)
