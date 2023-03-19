@@ -18,6 +18,7 @@ Example:
 
 func main() {
 	token := os.Getenv("CHATGPT_TOKEN")
+	conversation := ""
 	if token == "" {
 		fmt.Printf(tokenNotSet)
 		os.Exit(1)
@@ -27,7 +28,10 @@ func main() {
 		if userInput == "exit" {
 			break
 		}
-		fmt.Printf(chat.SendChat(userInput, token) + "\n")
+		conversation := conversation + userInput + "\n"
+		response := chat.SendChat(conversation, token) + "\n"
+		fmt.Printf(response)
+		conversation := conversation + response
 	}
 
 }
