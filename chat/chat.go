@@ -47,7 +47,7 @@ func SendChat(query string, token string) string {
 	request.Header.Set("Content-Type", "application/json; charset=UTF-8")
 	request.Header.Set("Authorization", "Bearer "+token)
 	client := http.Client{
-		Timeout: 5 * time.Second,
+		Timeout: 20 * time.Second,
 	}
 	response, error := client.Do(request)
 	if error != nil {
