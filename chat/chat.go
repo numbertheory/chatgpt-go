@@ -1,15 +1,14 @@
 package chat
 
 import (
-	"bufio"
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
-	"os"
 	"strings"
 	"time"
+
+	"github.com/chzyer/readline"
 )
 
 type ChatGPTChoices struct {
@@ -64,13 +63,13 @@ func SendChat(query string, token string) string {
 
 func StringPrompt(label string) string {
 	var s string
-	r := bufio.NewReader(os.Stdin)
-	for {
-		fmt.Fprint(os.Stderr, label+" ")
-		s, _ = r.ReadString('\n')
-		if s != "" {
-			break
-		}
+	rl, err := readline.New(label + " ")
+	if err != nil {
+		panic(err)
 	}
+	defer rl.Close()
+
+	s, _ = rl.Readline()
+		
 	return strings.TrimSpace(s)
 }
