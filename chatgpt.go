@@ -1,9 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
-	"encoding/json"
 
 	"github.com/numbertheory/chatgpt-go/chat"
 )
@@ -18,12 +18,12 @@ Example:
 `
 
 func jsonEscape(i string) string {
-    b, err := json.Marshal(i)
-    if err != nil {
-        panic(err)
-    }
-    // Trim the beginning and trailing " character
-    return string(b[1:len(b)-1])
+	b, err := json.Marshal(i)
+	if err != nil {
+		panic(err)
+	}
+	// Trim the beginning and trailing " character
+	return string(b[1 : len(b)-1])
 }
 
 func main() {
