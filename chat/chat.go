@@ -11,15 +11,11 @@ import (
 	"strings"
 )
 
-type ChatGPTMessage struct {
-	Role    string `json:"role"`
-	Content string `json:"content"`
-}
-
 type ChatGPTChoices struct {
-	Index        int            `json:"index"`
-	Message      ChatGPTMessage `json:"message"`
-	FinishReason string         `json:"finish_reason"`
+	Index        int    `json:"index"`
+	Text         string `json:"text"`
+	FinishReason string `json:"finish_reason"`
+	Logprobs     string `json:"logprobs"`
 }
 
 type ChatGPTUsage struct {
@@ -32,16 +28,19 @@ type Answer struct {
 	Id      string           `json:"id"`
 	Object  string           `json:"object"`
 	Created int              `json:"created"`
+	Model   string           `json:"model"`
 	Choices []ChatGPTChoices `json:"choices"`
-	Usage   []ChatGPTUsage   `json:"usage"`
+	Usage   ChatGPTUsage     `json:"usage"`
 }
 
 func SendChat(query string, token string) string {
 	var answer Answer
-	var url = "https://api.openai.com/v1/chat/completions"
+	var url = "https://api.openai.com/v1/completions"
 	var jsonBody = []byte(`{
-		"model": "gpt-3.5-turbo",
-		"messages": [{"role": "user", "content": "` + query + `"}]
+		"model": "text-davinci-003",
+		"prompt": "You are an AI in a conversation with a human. You can answer questions, provide information, and help with a wide variety of tasks. \n\n` + query +`\n\n",
+		"temperature": 0.7,
+		"max_tokens": 2048
 	  }`)
 
 	request, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonBody))
@@ -56,7 +55,7 @@ func SendChat(query string, token string) string {
 	body, _ := ioutil.ReadAll(response.Body)
 	json.Unmarshal([]byte(body), &answer)
 	// return string(body)
-	return answer.Choices[0].Message.Content
+	return answer.Choices[0].Text
 
 }
 
