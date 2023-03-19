@@ -4,8 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/numbertheory/chatgpt-go/chat"
+	"github.com/TwiN/go-color"
 )
 
 const usage = `Usage of ChatGPT:
@@ -35,14 +37,14 @@ func main() {
 		os.Exit(1)
 	}
 	for {
-		userInput := chat.StringPrompt("Human>")
+		userInput := chat.StringPrompt(color.InGreen("Human>"))
 		if userInput == "exit" {
 			break
 		}
 
 		conversation = conversation + jsonEscape(userInput)
 		response = chat.SendChat(conversation, token)
-		fmt.Printf(response + "\n")
+		fmt.Printf(color.InPurple("ChatGPT> ") + strings.TrimSpace(response) + "\n")
 		conversation = conversation + jsonEscape(response)
 	}
 
