@@ -38,7 +38,7 @@ func SendChat(query string, token string) string {
 	var url = "https://api.openai.com/v1/completions"
 	var jsonBody = []byte(`{
 		"model": "text-davinci-003",
-		"prompt": "You are an AI in a conversation with a human. You can answer questions, provide information, and help with a wide variety of tasks. \n\n` + query +`\n\n",
+		"prompt": "This is a conversation with a human being. Provide the next message that would be said as a reply to the last line of text.\n` + query + `\n",
 		"temperature": 0.7,
 		"max_tokens": 2048
 	  }`)
