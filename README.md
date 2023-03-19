@@ -32,11 +32,11 @@ When running, just type as you normally would with any chat. Press enter or retu
 It does carry on a conversation, but there are limits to how long the conversation can be. See `How it works` below.
 
 ```
-$ chatgpt-go
+$ chatgpt-go                     
 Human> Tell me a joke.
-Why did the chicken go to the séance? To get to the other side.
+ChatGPT> Why did the chicken cross the playground? To get to the other slide!
 Human> Tell me the same joke, but with a flamingo.
-Why did the flamingo go to the séance? To get to the other side of the lake!
+ChatGPT> Why did the flamingo cross the playground? To get to the other pink slide!
 Human> exit
 ```
 
