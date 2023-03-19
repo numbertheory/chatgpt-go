@@ -20,8 +20,10 @@ Go to https://platform.openai.com/account/api-keys to get API keys for your acco
 
 Then, make that key an environmental variable in your shell.
 
+```
 Example:
     export CHATGPT_TOKEN=<your-token>
+```
 
 ## Running
 
